@@ -13,6 +13,7 @@
     ],
     "xml" : [
         "asset_view.xml",
+        "product.xml",
     ],
     'translation': [
     ],
