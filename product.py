@@ -2,7 +2,7 @@
 #this repository contains the full copyright notices and license terms.
 
 from trytond.model import ModelSQL, ModelView, fields
-from trytond.pyson import Eval, Not, Equal
+from trytond.pyson import Eval
 
 
 class Product(ModelSQL, ModelView):
@@ -16,6 +16,6 @@ class Product(ModelSQL, ModelView):
         ('fuel', 'Fuel'),
         ('tire', 'Tire'),
         ], "Fleet Management Type",
-        states={'invisible': Not(Equal(Eval('type'), 'consumable'))})
+        states={'invisible': Eval('type') != 'consumable'})
 
 Product()
