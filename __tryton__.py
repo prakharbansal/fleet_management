@@ -14,6 +14,7 @@
     "xml" : [
         "asset_view.xml",
         "product.xml",
+        "purchase_view.xml",
     ],
     'translation': [
     ],
