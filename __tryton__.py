@@ -10,6 +10,7 @@
         "company",
         "product",
         "account",
+        "purchase",
     ],
     "xml" : [
         "asset_view.xml",
