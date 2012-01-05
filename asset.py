@@ -2,6 +2,7 @@
 #this repository contains the full copyright notices and license terms.
 
 from trytond.model import ModelSQL, ModelView, fields
+from trytond.pool import Pool
 
 
 class Asset(ModelSQL, ModelView):
@@ -41,5 +42,10 @@ class Asset(ModelSQL, ModelView):
     # Comments
     comment = fields.Text('Comment')
 
+    def default_year(self):
+        """Get the current year
+        """
+        date_obj = Pool().get('ir.date')
+        return date_obj.today().year
 
 Asset()
