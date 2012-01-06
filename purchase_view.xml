@@ -9,6 +9,7 @@
                 <![CDATA[
                 <data>
                     <xpath expr="//field[@name='product']" position="after">
+                        <newline/>
                         <label name="asset" />
                         <field name="asset" />
                         <label name="meter_reading" />
