@@ -9,7 +9,6 @@
                 <![CDATA[
                 <data>
                     <xpath expr="//field[@name='product']" position="after">
-                        <newline/>
                         <label name="asset" />
                         <field name="asset" />
                         <label name="meter_reading" />
@@ -18,6 +17,18 @@
                 </data>
                 ]]>
             </field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_asset_purchase_line_link">
+            <field name="name">Fuel Logs</field>
+            <field name="res_model">purchase.line</field>
+            <field name="domain">[('asset', '=', Eval('active_id'))]</field>
+        </record>
+        <record model="ir.action.keyword"
+                id="act_open_fuel_logs_keyword">
+            <field name="keyword">form_relate</field>
+            <field name="model">fleet.asset,-1</field>
+            <field name="action" ref="act_asset_purchase_line_link"/>
         </record>
 
     </data>
