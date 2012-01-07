@@ -14,6 +14,8 @@
                         <field name="asset" />
                         <label name="meter_reading" />
                         <field name="meter_reading" />
+                        <label name="fuel_efficiency" />
+                        <field name="fuel_efficiency" />
                     </xpath>
                 </data>
                 ]]>

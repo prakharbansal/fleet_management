@@ -33,12 +33,38 @@ class PurchaseLine(ModelSQL, ModelView):
         depends=['product_fleet_type']
         )
 
+    fuel_efficiency = fields.Function(
+        fields.Float("Fuel Efficiency",
+        states={
+            'invisible': Not(Equal(Eval('product_fleet_type'),'fuel')),
+            },
+        depends=['product_fleet_type']),
+        'get_fuel_efficiency'
+        )
+
     def get_product_fleet_type(self, ids, name):
         """Get the product type.
         """
         res = {}
         for purchase_line in self.browse(ids):
             res[purchase_line.id] = purchase_line.product.fleet_management_type
+        return res
+
+    def get_fuel_efficiency(self, ids, name):
+        """Return the fuel efficiency
+        """
+        res = {}
+        for purchase_line in self.browse(ids):
+            efficiency = 0.00
+            previous_line_ids = self.search([
+                ('asset', '=', purchase_line.asset.id),
+                ('purchase.purchase_date', '<', purchase_line.purchase.purchase_date)
+                ], limit=1)
+            if previous_line_ids:
+                previous_line = self.browse(previous_line_ids[0])
+                efficiency = (purchase_line.meter_reading - \
+                    previous_line.meter_reading) / purchase_line.quantity
+            res[purchase_line.id] = efficiency
         return res
 
     def on_change_with_product_fleet_type(self, vals):
